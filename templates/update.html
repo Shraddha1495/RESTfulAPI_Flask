@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table,
+        th,
+        td {
+          padding: 10px;
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+      </style>
+</head>
+<body background="red">
+    <div class="container">
+        <div style="text-align: center;">
+            <h1>{{message}}</h1>
+        </div>
+        <br/>
+        <div>
+            <form method="POST" action="/update" enctype="multipart/form-data">
+                <h1>UPDATE: </h1>
+                <label>Student ID: </label>
+                <input type="number" name="id" value="{{output[0].studentid}}" class="form-control" required readonly >
+                <label>First Name: </label>
+                <input type="text" name="fname" value="{{output[0].firstname}}" class="form-control" required >
+                <label>Last Name: </label>
+                <input type="text" name="lname" value="{{output[0].lastname}}" class="form-control" required >
+                <label>Date of Birth: </label>
+                <input type="date" name="dob" value="{{output[0].dob}}" class="form-control" required >
+                <label>Amount Due: </label>
+                <input type="number" name="amount" value="{{output[0].amountdue}}" class="form-control" required ><br/>          
+                <button type = "submit" value="Submit" class="btn btn-primary btn-lg" >UPDATE DATA</button>
+            </form>
+        </div>
+        <br/>
+    </div>   
+</body>
+</html>

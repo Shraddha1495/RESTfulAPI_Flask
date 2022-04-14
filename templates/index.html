@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table,
+        th,
+        td {
+          padding: 10px;
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+      </style>
+</head>
+<body background="red">
+    <div class="container">
+        <div style="text-align: center;">
+            <h1>{{message}}</h1>
+        </div>
+        <br/>
+        <div>
+            <h1>READ: </h1>
+            {% block content %}
+                <table>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Date of Birth</th>
+                        <th>Amount Due</th>
+        
+                    </tr>
+                    {% for rows in output %}
+                        <tr>
+                            <td>
+                                {{rows['studentid']}}
+                            </td>
+                            <td>
+                                {{rows['firstname']}}
+                            </td>
+                            <td>
+                                {{rows['lastname']}}
+                            </td>
+                            <td>
+                                {{rows['dob']}}
+                            </td>
+                            <td>
+                                {{rows['amountdue']}}
+                            </td>
+        
+                        </tr>       
+                    {% endfor %}
+                </table>
+                {% endblock content %}
+        </div>
+        <br/>
+        <div>
+            <form method="POST" action="/insert" enctype="multipart/form-data">
+                <h1>CREATE: </h1>
+                <label>Student ID: </label>
+                <input type="number" name="id" class="form-control" required >
+                <label>First Name: </label>
+                <input type="text" name="fname" class="form-control" required >
+                <label>Last Name: </label>
+                <input type="text" name="lname" class="form-control" required >
+                <label>Date of Birth: </label>
+                <input type="date" name="dob" class="form-control" required >
+                <label>Amount Due: </label>
+                <input type="number" name="amount" class="form-control" required ><br/>          
+                <button type = "submit" value="Submit" class="btn btn-primary btn-lg" >INSERT DATA</button>
+            </form>
+        </div>
+        <br/>
+        <div>
+            <form method="POST" action="/updateselect" enctype="multipart/form-data">
+                <h1>UPDATE: </h1>
+                <label>Student ID: </label>
+                <select class="form-control" name=id required>
+                    {% for item in output1 %}
+                    <option value="{{ item.studentid }}">{{ item.studentid }}</option>
+                    {% endfor %}
+                </select><br/>        
+                <button type = "submit" value="Submit" class="btn btn-primary btn-lg">SHOW DETAILS</button>
+            </form>
+        </div>
+        <br/>
+        <div>
+            <form method="POST" action="/delete" enctype="multipart/form-data">
+                <h1>DELETE: </h1>
+                <label>Student ID: </label>
+                <select class="form-control" name=id required>
+                    {% for item in output1 %}
+                    <option value="{{ item.studentid }}">{{ item.studentid }}</option>
+                    {% endfor %}
+                </select><br/>        
+                <button type = "submit" value="Submit" class="btn btn-primary btn-lg">DELETE</button>
+            </form>
+        </div>       
+    </div>   
+</body>
+</html>
